@@ -17,19 +17,19 @@ public class LoggingAspect {
     //Pointcut - when?
     // execution(* PACKAGE.*.*(..))
     // execution(* com.in28minutes.learnspringaop.aopexample.business.*.*(..))
-    @Before("execution(* com.in28minutes.learnspringaop.aopexample.*.*.*(..))")
+    @Before("com.in28minutes.learnspringaop.aspects.CommonPointcutConfig.dataPackageConfigUsingBean()")
     public void logMethodCallBeforeExecution(JoinPoint joinPoint) {
         //Logic - what?
         logger.info("Before Aspect - {} is called with arguments: {}", joinPoint, joinPoint.getArgs());
     }
 
-    @After("execution(* com.in28minutes.learnspringaop.aopexample.*.*.*(..))")
+    @After("com.in28minutes.learnspringaop.aspects.CommonPointcutConfig.businessAndDataPackageConfig()")
     public void logMethodCallAfterExecution(JoinPoint joinPoint) {
         logger.info("After Aspect - {} has executed", joinPoint);
     }
 
     @AfterThrowing(
-            pointcut = "execution(* com.in28minutes.learnspringaop.aopexample.*.*.*(..))",
+            pointcut = "com.in28minutes.learnspringaop.aspects.CommonPointcutConfig.dataPackageConfig()",
             throwing = "exception"
     )
     public void logMethodCallAfterThrowingException(JoinPoint joinPoint, Exception exception) {
